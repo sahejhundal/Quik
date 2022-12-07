@@ -1,6 +1,7 @@
 # Quik
 A simple text messaging web app that allows users to send messages to each other.
-### Live at (http://usequik.appspot.com/)
+### Live at (http://usequik.appspot.com/) 
+##### (warning: this page sometimes gets blocked for "phishing", in my case I had to use my phone's personal hotspot to access it)
 ##### Developed in Python using Google Web App Engine, AJAX and SQL.
 ##### Libraries used: webapp2, jinja2
 
