@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+  {% block header %}
+    {{ super() }}
+    <title>Quik App</title>
+    <meta name="description" content="Quik is a free messaging app." />
+  {% endblock %}
+  {% block content %}
+  <body>
+    <div class="menu home-menu">
+      <div class="sidebar">
+        <nav>
+          <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Quik</a>
+            <ul style="height: 64px; border: 1px transparent;" class="right">
+              <li><a class='dropdown-button' data-activates='dropdown1'>
+                <i class="material-icons">more_vert</i></a>
+                <ul id='dropdown1' class='dropdown-content'>
+                  <li><a href="#!">Share Profile</a></li>
+                  <li><a href="#!">Settings</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/signout">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="overlay">
+        </div>
+        {% for c in chats %}
+        <a style="text-decoration: none; color: #333;" href="/chat/{{c.other_person}}">
+          <ul>
+            <li>
+              <div align="center" class="chat-photo">
+                <i class="ion-person"></i>
+              </div>
+              <div class="chat-details">
+                <p class="chat-name">{{c.other_person}}</p>
+                <p class="chat-lastmessage">{{c.lastmessage}}</p>
+              </div>
+              <div class="chat-time">
+                {{c.xcreated}}
+              </div>
+              <div class="chat-status">
+                {% if c.readby==username %}
+                <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #333;" class="ion-android-done"></i></a>
+                {% elif c.readby=="Both" %}
+                <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #0084ff;" class="ion-android-done-all"></i></a>
+                {% else %}
+                <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #0084ff;" class="ion-record"></i></a>
+                {% endif %}
+              </div>
+            </li>
+          </ul>
+        </a>
+        <!--<div class="chat">
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <i style="color: #333; background: #fff; border: 1px solid #dbdbdb; font-size: 22px;
+              line-height: 39px;" class="ion-person circle"></i>
+              <span class="title">
+                <a href="/chat/{{c.other_person}}">{{c.other_person}}</a>
+              </span>
+              <p>{{c.lastmessageby}}: {{c.lastmessage}} <br>
+                 {{c.xcreated}} ({{c.lastmessageby}} Seen by {{c.readby}})
+              </p>
+              {% if c.readby==username %}
+              <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #333;" class="ion-ios-checkmark-outline"></i></a>
+              {% elif c.readby=="Both" %}
+              <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #0084ff;" class="ion-ios-checkmark">done_all</i></a>
+              {% else %}
+              <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #0084ff;" class="ion-record"></i></a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>-->
+        {% endfor %}
+      </div>
+      <div class="article" id="article">
+        <nav class="article-nav">
+          <div class="nav-wrapper">
+            <ul class="left hide-on-large-only">
+              <li><a href="/"><i class="ion-ios-arrow-back"></i></a></li>
+            </ul>
+            <a class="center brand-logo">
+              Chat
+            </a>
+          </div>
+        </nav>
+          <div class="click-to-chat">
+            <a href="/newchat"><i class="ion-ios-plus-outline"></i></a><br>
+            <p>Click on a person to chat<br>or start a new chat!</p>
+          </div>
+      </div>
+    </div>
+  </body>
+  <!--<div style=" background: rgb(0, 0, 0) ; opacity: 0.6;">&nbsp;</div>-->
+</html>
+{% endblock %}

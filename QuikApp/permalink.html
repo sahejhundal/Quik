@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+    {% block header %}
+        {{ super() }}
+        <title>Quik</title>
+        <meta name="description" content="Quik is a free messaging app. Coming soon on iOS and Android."/>
+    {% endblock %}
+          {% block content %}
+          <body>
+      <div class="menu">
+        <div class="sidebar">
+          <nav>
+            <div class="nav-wrapper">
+              <a href="/" class="brand-logo">Quik</a>
+            </div>
+          </nav>
+          <div class="overlay">
+          </div>
+          {% for c in chats %}
+          <a style="text-decoration: none; color: #333;" href="/chat/{{c.other_person}}">
+            <ul>
+              <li>
+                <div align="center" class="chat-photo">
+                  <i class="ion-person"></i>
+                </div>
+                <div class="chat-details">
+                  <p class="chat-name">{{c.other_person}}</p>
+                  <p class="chat-lastmessage">{{c.lastmessage}}</p>
+                </div>
+                <div class="chat-time">
+                  {{c.xcreated}}
+                </div>
+                <div class="chat-status">
+                  {% if c.readby==username %}
+                  <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #333;" class="ion-android-done"></i></a>
+                  {% elif c.readby=="Both" %}
+                  <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #0084ff;" class="ion-android-done-all"></i></a>
+                  {% else %}
+                  <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #0084ff;" class="ion-record"></i></a>
+                  {% endif %}
+                </div>
+              </li>
+            </ul>
+          </a>
+          <!--<div class="chat">
+            <ul class="collection">
+              <li class="collection-item avatar">
+                <i style="color: #333; background: #fff; border: 1px solid #dbdbdb; font-size: 22px;
+                line-height: 39px;" class="ion-person circle"></i>
+                <span class="title">
+                  <a href="/chat/{{c.other_person}}">{{c.other_person}}</a>
+                </span>
+                <p>{{c.lastmessageby}}: {{c.lastmessage}} <br>
+                   {{c.xcreated}} ({{c.lastmessageby}} Seen by {{c.readby}})
+                </p>
+                {% if c.readby==username %}
+                <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #333;" class="material-icons">done</i></a>
+                {% elif c.readby=="Both" %}
+                <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #0084ff;" class="material-icons">done_all</i></a>
+                {% else %}
+                <a href="/chat/{{c.me}}" class="secondary-content"><i style="color: #0084ff;" class="ion-record"></i></a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>-->
+          {% endfor %}
+        </div>
+        <div class="article" id="article">
+          <nav class="article-nav">
+            <div class="nav-wrapper">
+              <ul class="left hide-on-large-only">
+                <li><a href="/"><i class="ion-ios-arrow-back"></i></a></li>
+              </ul>
+              <a class="center brand-logo">
+                {{chat.other_person}}
+              </a>
+              <ul class="right">
+                <li><a class='dropdown-button' data-activates='dropdown1'><i class="material-icons">more_vert</i></a></li>
+              </ul>
+              <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="">Share Profile</a></li>
+                <li><a href="#!">Settings</a></li>
+                <li class="divider"></li>
+                <li><a href="/signout">Logout</a></li>
+              </ul>
+            </div>
+          </nav>
+            <div id="section" class="section">
+              {% for i in messages %}
+              {% if i.author==username %}
+              <div class="tooltip from-me">
+                {{i.content}}<span class="tooltiptext tooltip-left">{{i.created.strftime('%a %-I:%M %p')}}</span>
+              </div>
+              {% else %}
+              <div class="tooltip from-them">
+                {{i.content}}<span class="tooltiptext">{{i.created.strftime('%a %-I:%M %p')}}</span>
+              </div>
+              {% endif %}
+              <div class="clear"></div>
+              {% endfor %}
+            </div>
+            <form autocomplete="off" id="main-form" class="chat-form" method="post"
+            onsubmit="Text($('#text-input'), '{{chat.key.id()}}', {% if username==chat.me %}'{{chat.to}}'{% else %}'{{chat.me}}'{% endif %})">
+              <input autocomplete="off" name="text" placeholder="Quik" class="input-field userinput" type="text" id="text-input">
+              <button type="submit" class="textbutton right">Send</button>
+            </form>
+        </div>
+      </div>
+    </body>
+</html>
+{% endblock %}

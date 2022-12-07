@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+  {% block header %}
+    {{ super() }}
+    <title>Quik | New Chat</title>
+    <meta name='description' content="Sign In | Quik is a free messaging app.">
+  {% endblock %}
+  {% block content %}
+  <body>
+  <br><br>
+    <div style="background: #fff;" class="user-bg" align="center">
+      <div class="form">
+        <a href="/"><h1>Quik</h1></a>
+        <h3>New Chat</h3>
+        <p class="error">{{error}}</p>
+        <form autocorrect="off" autocapitalize="off" spellcheck="false" method="post">
+          <input name="to" value="{{target}}" placeholder="Who to?" class="input-field userinput" type="text" id="to">
+          <input name="content" placeholder="Type your message..." class="input-field userinput" type="text"
+          id="content">
+          <br>
+          <button type="submit" class="textbutton">
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  {% endblock %}
+  </body>
+</html>

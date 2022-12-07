@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+  {% block header %}
+    {{ super() }}
+    <title>Quik | Sign Up</title>
+    <meta name='description' content="Sign Up | Quik is a free messaging app.">
+  {% endblock %}
+  <body>
+  {% block content %}
+  <div class="user-bg" align="center">
+    <div class="form">
+      <h1>Quik</h1>
+      <h3>Sign Up</h3>
+      <p class="error">{{error}}</p>
+      {% if user %}
+      <br>
+      <br>
+      <a href="/">
+        <div class="continueas">
+          <p>
+            Continue as <b>{{user}}</b>
+          </p>
+        </div>
+      </a>
+      <br><br>
+      <a style="text-decoration: none;" href="/signout">
+        <div align="center" class="otheraccount">
+          <p>
+            Switch accounts?
+          </p>
+        </div>
+      </a>
+      {% else %}
+      <form autocomplete"off" autocorrect="off" autocapitalize="off" spellcheck="false" method="post">
+        <input autocomplete="off" name="name" placeholder="Name" class="input-field userinput" type="text" id="name">
+        <input autocomplete="off" name="number" placeholder="Number" class="input-field userinput" type="tel" id="number">
+        <input autocomplete="off" name="username" placeholder="Username" class="input-field userinput" type="text" id="username">
+        <input autocomplete="off" name="password" placeholder="Password" class="input-field userinput" type="password" id="password">
+        <br>
+        <button type="submit" class="textbutton">
+          Continue
+        </button>
+      </form>
+      <a style="text-decoration: none;" href="/signin">
+        <div align="center" class="otheraccount">
+          <p style="margin-top: 30px;">
+            Already have an account? Sign in here!
+          </p>
+        </div>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+  {% endblock %}
+  </body>
+</html>
